@@ -1,0 +1,54 @@
+{
+   "type": ["null", "object"],
+   "additionalProperties": false,
+   "properties": {
+    "survey_id": {
+      "type": ["null", "string"]
+    },
+    "response_id": {
+       "type": ["null", "string"]
+    },
+    "values": {
+       "type": ["null", "object"],
+       "additionalProperties": true,
+       "properties": {
+          "distribution_channel": {"type": ["null", "string"]},
+          "duration": {"type": ["null", "integer"]},
+          "end_date": {
+             "type": ["null", "string"],
+             "format": "date-time"
+          },
+          "finished": {"type": ["null", "integer"]},
+          "location_latitude": {"type": ["null", "string"]},
+          "location_longitude": {"type": ["null", "string"]},
+          "progress": {"type": ["null", "integer"]},
+          "recorded_date": {
+             "type": ["null", "string"],
+             "format": "date-time"
+          },
+          "start_date": {
+             "type": ["null", "string"],
+             "format": "date-time"
+          },
+          "status": {"type": ["null", "integer"]},
+          "user_language": {"type": ["null", "string"]}
+       }
+    },
+    "labels": {
+      "type": ["null", "object"],
+      "additionalProperties": true,
+      "properties": {}
+    },
+    "displayed_fields": {
+       "type": ["null", "array"],
+       "items": {
+            "type": ["null", "string"]
+        }
+    },
+    "displayed_values": {
+      "type": ["null", "object"],
+      "additionalProperties": true,
+      "properties": {}
+    }
+   }
+}
