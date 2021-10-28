@@ -1,5 +1,7 @@
 {
-  "client_id": "",
-  "client_secret": "my_password",
-  "datacenter_id": "2017-01-01T00:00:00Z"
+  "start_date": "2021-10-28",
+  "data_center": "xxxx",
+  "client_id": "xxxxxxxxxxx",
+  "client_secret": "xxxxxxxxxxxxxxxxxx",
+  "refresh_token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
