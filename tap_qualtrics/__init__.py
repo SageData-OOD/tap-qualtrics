@@ -301,6 +301,11 @@ def pop_out_unnecessary_records(records):
             records.remove(row)
 
 
+def date_format(date):
+    """  '2021-12-29 10:28:23' -> '2021-12-29T10:28:23Z'  """
+    return "T".join(date.split(" ")) + "Z" if "Z" not in date else date
+
+
 def sync_survey_responses(config, state, stream):
     bookmark_column = get_bookmark(stream.tap_stream_id)
     mdata = metadata.to_map(stream.metadata)
@@ -342,7 +347,7 @@ def sync_survey_responses(config, state, stream):
                     singer.write_records(stream.tap_stream_id, [transformed_data])
                     counter.increment()
                     if bookmark_column:
-                        local_bookmark = max([local_bookmark, converted_data[bookmark_column]])
+                        local_bookmark = max([local_bookmark, date_format(converted_data[bookmark_column])])
                 if end_date.split("T")[0] == datetime.today().strftime('%Y-%m-%d'):
                     break
                 local_bookmark = end_date
