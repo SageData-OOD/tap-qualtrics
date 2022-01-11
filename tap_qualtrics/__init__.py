@@ -271,7 +271,8 @@ def camel_to_snake_case(name):
     AssimilatedVatBox  --> assimilated_vat_box
     """
     exceptional = {
-        "i_p_address": "ip_address"
+        "i_p_address": "ip_address",
+        "question_i_d": "question_id"
     }
     sn = re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()
     sn = sn.split(" ")[0]   # i.e. "duration (in second)" -> "duration"
