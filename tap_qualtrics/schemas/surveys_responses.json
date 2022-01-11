@@ -2,53 +2,62 @@
    "type": ["null", "object"],
    "additionalProperties": false,
    "properties": {
-    "survey_id": {
+     "survey_id": {
       "type": ["null", "string"]
-    },
-    "response_id": {
+     },
+     "start_date": {
        "type": ["null", "string"]
-    },
-    "values": {
-       "type": ["null", "object"],
-       "additionalProperties": true,
-       "properties": {
-          "distribution_channel": {"type": ["null", "string"]},
-          "duration": {"type": ["null", "integer"]},
-          "end_date": {
-             "type": ["null", "string"],
-             "format": "date-time"
-          },
-          "finished": {"type": ["null", "integer"]},
-          "location_latitude": {"type": ["null", "string"]},
-          "location_longitude": {"type": ["null", "string"]},
-          "progress": {"type": ["null", "integer"]},
-          "recorded_date": {
-             "type": ["null", "string"],
-             "format": "date-time"
-          },
-          "start_date": {
-             "type": ["null", "string"],
-             "format": "date-time"
-          },
-          "status": {"type": ["null", "integer"]},
-          "user_language": {"type": ["null", "string"]}
-       }
-    },
-    "labels": {
-      "type": ["null", "object"],
-      "additionalProperties": true,
-      "properties": {}
-    },
-    "displayed_fields": {
-       "type": ["null", "array"],
-       "items": {
-            "type": ["null", "string"]
-        }
-    },
-    "displayed_values": {
-      "type": ["null", "object"],
-      "additionalProperties": true,
-      "properties": {}
+     },
+     "end_date": {
+       "type": ["null", "string"]
+     },
+     "status": {
+       "type": ["null", "string"]
+     },
+     "ip_address": {
+       "type": ["null", "string"]
+     },
+     "progress": {
+       "type": ["null", "string"]
+     },
+     "duration": {
+       "type": ["null", "string"]
+     },
+     "finished": {
+       "type": ["null", "string"]
+     },
+     "recorded_date": {
+       "type": ["null", "string"]
+     },
+     "response_id": {
+       "type": ["null", "string"]
+     },
+     "recipient_last_name": {
+       "type": ["null", "string"]
+     },
+     "recipient_first_name": {
+       "type": ["null", "string"]
+     },
+     "recipient_email": {
+       "type": ["null", "string"]
+     },
+     "external_reference": {
+       "type": ["null", "string"]
+     },
+     "location_latitude": {
+       "type": ["null", "string"]
+     },
+     "location_longitude": {
+       "type": ["null", "string"]
+     },
+     "distribution_channel": {
+       "type": ["null", "string"]
+     },
+     "user_language": {
+       "type": ["null", "string"]
+     },
+    "other_properties": {
+      "type": ["null", "string"]
     }
    }
 }

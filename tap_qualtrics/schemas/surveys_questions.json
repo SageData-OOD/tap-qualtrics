@@ -1,0 +1,74 @@
+{
+   "type": ["null", "object"],
+   "additional_properties": false,
+   "properties": {
+     "survey_id": {
+      "type": ["null", "string"]
+     },
+     "question_text": {
+       "type": ["null", "string"]
+     },
+     "default_choices": {
+       "type": ["null", "boolean"]
+     },
+     "data_export_tag": {
+       "type": ["null", "string"]
+     },
+     "question_type": {
+       "type": ["null", "string"]
+     },
+     "configuration": {
+       "type": ["null", "string"]
+     },
+     "question_description": {
+       "type": ["null", "string"]
+     },
+     "choices": {
+       "type": ["null", "string"]
+     },
+     "choice_order": {
+       "type": ["null", "string"]
+     },
+     "validation": {
+       "type": ["null", "object"],
+       "additionalProperties": true,
+       "properties": {}
+
+     },
+     "grading_data": {
+       "type": ["null", "string"]
+     },
+     "language": {
+       "type": ["null", "string"]
+     },
+     "next_choice_id": {
+       "type": ["null", "integer"]
+     },
+     "next_answer_id": {
+       "type": ["null", "integer"]
+     },
+     "column_labels": {
+       "type": ["null", "array"],
+       "items": {
+        "type": ["null", "string"]
+      }
+     },
+     "question_id": {
+       "type": ["null", "string"]
+     },
+     "selector": {
+       "type": ["null", "string"]
+     },
+     "sub_selector": {
+       "type": ["null", "string"]
+     },
+     "data_visibility": {
+       "type": ["null", "object"],
+       "additionalProperties": true,
+       "properties": {}
+     },
+     "question_text__unsafe": {
+       "type": ["null", "string"]
+     }
+   }
+}
