@@ -117,16 +117,6 @@ def discover():
     return Catalog(streams)
 
 
-def print_metrics(config):
-    creds = {
-        "data_center": config["data_center"],
-        "state": {"service_client_id": config["client_id"], "service_client_secret": config["client_secret"]},
-        "raw_credentials": {"refresh_token": config["refresh_token"]}
-    }
-    metric = {"type": "secret", "value": creds, "tags": "tap-secret"}
-    LOGGER.info('METRIC: %s', json.dumps(metric))
-
-
 def _refresh_token(config):
     data = {
         'grant_type': 'refresh_token',
@@ -146,7 +136,6 @@ def refresh_access_token_if_expired(config):
         res = _refresh_token(config)
         config["access_token"] = res["access_token"]
         config["refresh_token"] = res["refresh_token"]
-        print_metrics(config)
         config["expires_in"] = datetime.utcnow() + timedelta(seconds=int(res["expires_in"]))
         return True
     return False
