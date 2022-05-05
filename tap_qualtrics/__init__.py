@@ -93,7 +93,7 @@ def create_metadata_for_report(stream_id, schema, key_properties):
                 [{"breadcrumb": ["properties", key, "properties", prop], "metadata": {"inclusion": inclusion}} for prop
                  in schema.properties.get(key).properties])
         else:
-            inclusion = "automatic" if key in key_properties else "available"
+            inclusion = "automatic" if key in key_properties + [replication_key] else "available"
             mdata.append({"breadcrumb": ["properties", key], "metadata": {"inclusion": inclusion}})
 
     return mdata
@@ -275,10 +275,13 @@ def camel_to_snake_case(name):
     """
     exceptional = {
         "i_p_address": "ip_address",
-        "question_i_d": "question_id"
+        "question_i_d": "question_id",
+        "duration_(in_seconds)": "duration",
+        "frage_1__n_p_s__g_r_o_u_p": "frage_1_nps_group",
+        "q__u_r_l": "q_url"
     }
     sn = re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()
-    sn = sn.split(" ")[0]   # i.e. "duration (in second)" -> "duration"
+    sn = sn.replace(" ", "_")   # i.e. "duration (in second)" -> "duration"
     return exceptional.get(sn, sn)
 
 
@@ -290,6 +293,10 @@ def refactor_property_name(record):
 
 def refactor_record_according_to_schema(record, stream_id, schema):
     """ gathering all extra filed into custom property -> "other_properties": {...all extra properties...}  """
+
+    if "Create New Field or Choose From Dropdown..." in record:
+        record.pop("Create New Field or Choose From Dropdown...")
+
     record = refactor_property_name(record)
     if stream_id == "surveys_responses":
         record["other_properties"] = {snake_to_camel_case(r): record.pop(r) for r in record.copy() if r not in schema.get("properties")}
