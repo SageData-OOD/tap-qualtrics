@@ -295,7 +295,12 @@ def camel_to_snake_case(name):
     name = name.replace(" ", "_")
     name = pattern_one.sub(r'\1_\2', name)
     name = pattern_two.sub(r'_\1', name)
-    return pattern_three.sub(r'\1_\2', name).lower()
+    name = pattern_three.sub(r'\1_\2', name).lower()
+
+    if name == "duration_(in_seconds)":
+        return "duration"
+    else:
+        return name
 
 def refactor_property_name(record):
     converted_data = {camel_to_snake_case(k): v if not isinstance(v, dict) else refactor_property_name(v)
