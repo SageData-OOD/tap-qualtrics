@@ -265,25 +265,37 @@ def get_survey_responses(survey_id, payload, config):
             return df.to_dict('records')
 
 
-def snake_to_camel_case(element):
-    return ''.join(ele.title() for ele in element.split("_"))
+# def snake_to_camel_case(element):
+#     return ''.join(ele.title() for ele in element.split("_"))
 
+
+# def camel_to_snake_case(name):
+#     """
+#     AssimilatedVatBox  --> assimilated_vat_box
+#     """
+#     exceptional = {
+#         "i_p_address": "ip_address",
+#         "question_i_d": "question_id",
+#         "duration_(in_seconds)": "duration",
+#         "frage_1__n_p_s__g_r_o_u_p": "frage_1_nps_group",
+#         "q__u_r_l": "q_url"
+#     }
+#     sn = re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()
+#     sn = sn.replace(" ", "_")   # i.e. "duration (in second)" -> "duration"
+#     return exceptional.get(sn, sn)
+
+pattern_one = re.compile('(.)([A-Z][a-z]+)')
+pattern_two = re.compile('__([A-Z])')
+pattern_three = re.compile('([a-z0-9])([A-Z])')
 
 def camel_to_snake_case(name):
-    """
-    AssimilatedVatBox  --> assimilated_vat_box
-    """
-    exceptional = {
-        "i_p_address": "ip_address",
-        "question_i_d": "question_id",
-        "duration_(in_seconds)": "duration",
-        "frage_1__n_p_s__g_r_o_u_p": "frage_1_nps_group",
-        "q__u_r_l": "q_url"
-    }
-    sn = re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()
-    sn = sn.replace(" ", "_")   # i.e. "duration (in second)" -> "duration"
-    return exceptional.get(sn, sn)
-
+    # camel2_camel2_case --> camel2_camel2_case
+    # getHTTPResponseCode --> get_http_response_code
+    # HTTPResponseCodeXYZ --> http_response_code_xyz
+    name = name.replace(" ", "_")
+    name = pattern_one.sub(r'\1_\2', name)
+    name = pattern_two.sub(r'_\1', name)
+    return pattern_three.sub(r'\1_\2', name).lower()
 
 def refactor_property_name(record):
     converted_data = {camel_to_snake_case(k): v if not isinstance(v, dict) else refactor_property_name(v)
@@ -299,7 +311,7 @@ def refactor_record_according_to_schema(record, stream_id, schema):
 
     record = refactor_property_name(record)
     if stream_id == "surveys_responses":
-        record["other_properties"] = {snake_to_camel_case(r): record.pop(r) for r in record.copy() if r not in schema.get("properties")}
+        record["other_properties"] = {r: record.pop(r) for r in record.copy() if r not in schema.get("properties")}
     return record
 
 
