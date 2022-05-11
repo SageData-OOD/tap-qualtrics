@@ -316,7 +316,10 @@ def refactor_record_according_to_schema(record, stream_id, schema):
 
     record = refactor_property_name(record)
     if stream_id == "surveys_responses":
-        record["other_properties"] = {r: record.pop(r) for r in record.copy() if r not in schema.get("properties")}
+        other_properties = {r: record.pop(r) for r in record.copy() if r not in schema.get("properties")}
+        if other_properties:
+            record["other_properties"] = other_properties
+            record["excessive_properties"] = [{"property_name": k, "property_value": v} for k, v in other_properties.items()]
     return record
 
 

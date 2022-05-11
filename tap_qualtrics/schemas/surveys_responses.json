@@ -58,6 +58,16 @@
      },
     "other_properties": {
       "type": ["null", "string"]
+    },
+    "excessive_properties": {
+      "type": ["null", "array"],
+       "items": {
+        "type": ["null", "object"],
+         "properties": {
+           "property_name": {"type": ["null", "string"]},
+           "property_value": {"type": ["null", "string"]}
+         }
+      }
     }
    }
 }
