@@ -230,8 +230,10 @@ def get_survey_responses(survey_id, payload, config):
         headers = header_setup(headers, config)
         check_url = url + progress_id
         check_request = requests.get(check_url, headers=headers)
-        check_response = check_request.json()
+        if check_request.status_code >= 300:
+            raise Exception(check_request.text)
 
+        check_response = check_request.json()
         is_file = check_response.get("result", {}).get("fileId")
         progress_status = check_response["result"]["status"]
         time.sleep(0.25)
