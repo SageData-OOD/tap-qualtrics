@@ -260,6 +260,8 @@ def get_survey_responses(survey_id, payload, config):
     download_url = url + is_file + '/file'
     headers = header_setup(headers, config)
     download_request = requests.get(download_url, headers=headers, stream=True)
+    if download_request.status_code >= 300:
+        raise Exception(download_request.text)
 
     with zipfile.ZipFile(io.BytesIO(download_request.content)) as survey_zip:
         for s in survey_zip.infolist():
@@ -395,6 +397,9 @@ def sync_survey_responses(config, state, stream):
 @utils.ratelimit(1, 1)
 def make_get_request(url, headers):
     req = requests.get(url, headers=headers)
+    if req.status_code >= 300:
+        raise Exception(req.text)
+
     response = req.json()
 
     if response['meta']['httpStatus'] == '429 - Too Many Requests':
